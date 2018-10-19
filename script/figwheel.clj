@@ -22,7 +22,7 @@
 
 (defn apply-txs [app-state txs]
   (reduce (fn [state [ref {:keys [added removed props]}]]
-            (update-in state ref 
+            (update-in state ref
                        update-in [:txs] ))
           txs app-state))
 
@@ -36,7 +36,7 @@
 (defn updater [req]
   (with-channel req up-chan
     (swap! sessions conj up-chan)
-    (on-receive up-chan (fn [req] 
+    (on-receive up-chan (fn [req]
                           (prn "websocket request: " req)
                           (set-app-state (read-string req) up-chan)))
     (on-close up-chan (fn [status]
@@ -60,19 +60,19 @@
           (.write wrtr new-file-contents)))))
 
 (ra/start-figwheel!
-  {:figwheel-options {:http-server-root "public"
-                      :ring-handler handler}
-   :build-ids ["dev"]
-   :all-builds
-   [{:id "dev"
-     :figwheel {:on-jsload "transmorphic.core/reload-hook"}
-     :source-paths ["src/cljs" "src/cljc" "src/clj"]
-     :compiler {:main 'examples.playground
-                :optimizations :none
-                :cache-analysis true 
-                :asset-path "js"
-                :output-to "resources/public/js/transmorphic.js"
-                :output-dir "resources/public/js"
-                :verbose true}}]})
+ {:figwheel-options {:http-server-root "public"
+                     :ring-handler handler}
+  :build-ids ["dev"]
+  :all-builds
+  [{:id "dev"
+    :figwheel {:on-jsload "transmorphic.core/reload-hook"}
+    :source-paths ["src/cljs" "src/cljc" "src/clj"]
+    :compiler {:main 'examples.playground
+               :optimizations :none
+               :cache-analysis true
+               :asset-path "js"
+               :output-to "resources/public/js/transmorphic.js"
+               :output-dir "resources/public/js"
+               :verbose true}}]})
 
 (ra/cljs-repl)

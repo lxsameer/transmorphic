@@ -6,11 +6,16 @@
             [lein-figwheel "0.5.0-4"]]
   :source-paths ["src/clj" "src/cljs" "src/cljc" "test"]
   :cljsbuild {:builds {:main {:source-paths ["src/clj" "src/cljs" "src/cljc" "test"]
-                        						:compiler {:optimizations :none
-                                         :cache-analysis true 
-                                   					 :output-dir "target/out"
-                                  						 :output-to "target/cloxp-cljs.js"}}}
-         			  :test-commands {"unit-tests" ["phantomjs" :runner "target/cloxp-cljs.js"]}}
+                              :figwheel {:on-jsload "transmorphic.core/reload-hook"}
+                              :compiler {:optimizations :none
+                                         :cache-analysis true
+                                         :asset-path "js/compiled/"
+                                         :main "examples.playground"
+                                         :output-dir "resources/public/js/compiled/"
+                                         :output-to "resources/public/js/compiled/app.js"}}}
+              :test-commands {"unit-tests" ["phantomjs" :runner "resources/public/js/compiled/app.js"]}}
+
+  :resource-paths ["resources"]
   :dependencies
   [[cljsjs/react-dom "0.14.3-1"]
    [cljsjs/react-dom-server "0.14.3-0"]
@@ -26,4 +31,4 @@
    [fogus/ring-edn "0.3.0"]
    [binaryage/devtools "0.5.2"]
    [org.clojure/tools.reader "1.0.0-alpha1"]]
-   :main cljs-morphic.server/start-server)
+  :main cljs-morphic.server/start-server)

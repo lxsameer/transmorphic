@@ -1,0 +1,2 @@
+;; Analyzed by ClojureScript 1.7.170
+{:name examples.lol, :doc nil, :excludes #{}, :use-macros nil, :require-macros nil, :uses nil, :requires nil, :imports nil, :defs {a {:name examples.lol/a, :file "src/cljs/examples/lol.cljs", :line 1, :column 19, :end-line 1, :end-column 25, :meta {:file "/Users/sameer.rahmani/.C/transmorphic/src/cljs/examples/lol.cljs", :line 1, :column 24, :end-line 1, :end-column 25}}}}
